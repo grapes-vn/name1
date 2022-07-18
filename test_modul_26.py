@@ -18,15 +18,13 @@ def testing():
 
 def test_show_my_pets():
    # Вводим email
-   #element = WebDriverWait(pytest.driver, 10).until(pytest.driver.find_element_by_id('email'))
+   element = WebDriverWait(pytest.driver, timeout=10).until(EC.presence_of_element_located((By.ID, "email")))
    pytest.driver.find_element_by_id('email').send_keys('grapes-vn@ngs.ru')
    # Вводим пароль
    pytest.driver.find_element_by_id('pass').send_keys('PetVin17')
    # Нажимаем на кнопку входа в аккаунт
    pytest.driver.find_element_by_css_selector('button[type="submit"]').click()
    # Нажимаем на ссылку Мои питомцы
-   #my_pets = WebDriverWait(pytest.driver, 5).until(pytest.driver.find_element_by_link_text('Мои питомцы'))
-   #my_pets.click()
    pytest.driver.find_element_by_link_text('Мои питомцы').click()
    # Проверяем, что мы оказались на странице Мои питомцы пользователя
    assert pytest.driver.find_element_by_tag_name('h2').text == "grapes-vn"
